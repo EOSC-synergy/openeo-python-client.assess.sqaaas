@@ -1,0 +1,66 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/Open-EO/openeo-python-client:
+      branch: master
+      repo: https://github.com/Open-EO/openeo-python-client
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/Open-EO/openeo-python-client git:
+        commands:
+        - /usr/bin/env sh .sqa/script.squeaky-salmon-chicken.sh
+        container: qc.acc_crappy-platinum-ocelot
+  QC.Doc:
+    repos:
+      github.com/Open-EO/openeo-python-client find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snazzy-lime-greyhound.sh
+        container: qc.doc_messy-cyan-beagle
+      github.com/Open-EO/openeo-python-client git:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-ruby-binturong.sh
+        container: qc.doc_muggy-ecru-paradise
+      github.com/Open-EO/openeo-python-client markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-persimmon-caiman.sh
+        container: qc.doc_skinny-myrtle-axolotl
+      github.com/Open-EO/openeo-python-client restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-grey-dogfish.sh
+        container: qc.doc_tasty-red-caracal
+  QC.Lic:
+    repos:
+      github.com/Open-EO/openeo-python-client licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-lavender-centipede.sh
+        container: qc.lic_droopy-ochre-zorse
+  QC.Sec:
+    repos:
+      github.com/Open-EO/openeo-python-client bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-ruby-chamois.sh
+        container: qc.sec_cloudy-orange-moorhen
+  QC.Sty:
+    repos:
+      github.com/Open-EO/openeo-python-client flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-beige-seahorse.sh
+        container: qc.sty_stealthy-amaranth-spoonbill
+      github.com/Open-EO/openeo-python-client jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-cinnabar-impala.sh
+        container: qc.sty_muzzy-fuchsia-setter
+  QC.Ver:
+    repos:
+      github.com/Open-EO/openeo-python-client get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.baggy-smalt-bombay.sh
+        container: qc.ver_stealthy-ecru-tuatara
+timeout: 5400
